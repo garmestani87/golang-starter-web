@@ -1,7 +1,7 @@
 package main
 
-import "fmt"
+import "go-web-api/server"
 
-func main(){
-	fmt.Println("a ...any")
+func main() {
+	server.Start()
 }
