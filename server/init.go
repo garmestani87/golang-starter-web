@@ -21,6 +21,9 @@ func Start() {
 
 			users := v1.Group("/users")
 			routers.UsersRouter(users)
+
+			header := v1.Group("/header")
+			routers.BindHeaderRouter(header)
 		}
 
 	}
