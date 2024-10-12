@@ -1,1 +1,1 @@
-# golang-web-api
+# golang-starter-web
