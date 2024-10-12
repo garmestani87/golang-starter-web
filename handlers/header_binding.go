@@ -15,6 +15,8 @@ func NewUserInfo() *UserInfo {
 	return &UserInfo{}
 }
 
+//header binding
+
 func (u *UserInfo) ReadFromHeader(ctx *gin.Context) {
 	apiKey := ctx.GetHeader("api-key")
 	ctx.JSON(http.StatusOK, gin.H{
@@ -24,7 +26,7 @@ func (u *UserInfo) ReadFromHeader(ctx *gin.Context) {
 	})
 }
 
-func (u *UserInfo) ReadFromBindHeader(ctx *gin.Context) {
+func (u *UserInfo) ReadAndBindHeader(ctx *gin.Context) {
 	ctx.BindHeader(&u)
 	ctx.JSON(http.StatusOK, gin.H{
 		"id":   u.Id,
