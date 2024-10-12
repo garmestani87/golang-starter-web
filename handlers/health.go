@@ -8,10 +8,10 @@ import (
 
 type HealthHandler struct{}
 
-func New() *HealthHandler {
+func NewHealth() *HealthHandler {
 	return &HealthHandler{}
 }
 
-func (h *HealthHandler) Handle(ctx *gin.Context) {
+func (h *HealthHandler) Check(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, "pong !!!")
 }

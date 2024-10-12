@@ -6,6 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func Route(r *gin.RouterGroup) {
-	r.GET("/ping", handlers.New().Handle)
+func HealthRouter(r *gin.RouterGroup) {
+	r.GET("/ping", handlers.NewHealth().Check)
 }

@@ -12,8 +12,18 @@ func Start() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 
-	health := r.Group("/health")
-	routers.Route(health)
+	api := r.Group("/api")
+	{
+		v1 := api.Group("/v1")
+		{
+			health := v1.Group("/health")
+			routers.HealthRouter(health)
+
+			users := v1.Group("/users")
+			routers.UsersRouter(users)
+		}
+
+	}
 
 	os.Setenv("APP_ENV", "dev")
 	cfg := config.GetConfig()
