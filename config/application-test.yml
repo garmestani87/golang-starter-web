@@ -1,0 +1,4 @@
+application:
+  name: web-starter
+server:
+  port: 300080

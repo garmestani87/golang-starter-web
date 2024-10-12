@@ -1,7 +1,9 @@
 package server
 
 import (
+	"go-web-api/config"
 	"go-web-api/routers"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -13,7 +15,10 @@ func Start() {
 	health := r.Group("/health")
 	routers.Route(health)
 
-	err := r.Run(":30080")
+	os.Setenv("APP_ENV", "dev")
+	cfg := config.GetConfig()
+
+	err := r.Run(cfg.Server.Port)
 	if err != nil {
 		panic(err)
 	}
