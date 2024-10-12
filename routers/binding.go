@@ -13,5 +13,5 @@ func BindHeaderRouter(r *gin.RouterGroup) {
 	r.POST("/query_1", handlers.ReadFromQuery)
 	r.POST("/query_2", handlers.ReadArrayFromQuery)
 	
-	r.GET("/param_1", handlers.ReadFromParam)
+	r.GET("/param_1/:id/:name", handlers.ReadFromParam)
 }
