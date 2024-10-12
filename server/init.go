@@ -23,7 +23,7 @@ func Start() {
 			routers.UsersRouter(users)
 
 			header := v1.Group("/binding")
-			routers.BindHeaderRouter(header)
+			routers.BindingRouter(header)
 		}
 
 	}
