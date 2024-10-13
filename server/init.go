@@ -3,27 +3,29 @@ package server
 import (
 	"go-web-api/config"
 	"go-web-api/routers"
+	"go-web-api/validators"
 	"os"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
+	"github.com/go-playground/validator/v10"
 )
 
 func Start() {
 	r := gin.New()
 	r.Use(gin.Logger(), gin.Recovery())
 
+	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
+		v.RegisterValidation("mobile", validators.MobileValidator)
+	}
 	api := r.Group("/api")
 	{
 		v1 := api.Group("/v1")
 		{
-			health := v1.Group("/health")
-			routers.HealthRouter(health)
-
-			users := v1.Group("/users")
-			routers.UsersRouter(users)
-
-			header := v1.Group("/binding")
-			routers.BindingRouter(header)
+			routers.HealthRouter(v1.Group("/health"))
+			routers.UsersRouter(v1.Group("/users"))
+			routers.BindingRouter(v1.Group("/binding"))
+			routers.RouteValidator(v1.Group("/validate"))
 		}
 
 	}
