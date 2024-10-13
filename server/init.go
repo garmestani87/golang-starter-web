@@ -2,6 +2,7 @@ package server
 
 import (
 	"go-web-api/config"
+	"go-web-api/middlewares"
 	"go-web-api/routers"
 	"go-web-api/validators"
 	"os"
@@ -13,7 +14,7 @@ import (
 
 func Start() {
 	r := gin.New()
-	r.Use(gin.Logger(), gin.Recovery())
+	r.Use(gin.Logger(), gin.Recovery(), middlewares.TokenMidlleware(), middlewares.AclMiddleware())
 
 	if v, ok := binding.Validator.Engine().(*validator.Validate); ok {
 		v.RegisterValidation("mobile", validators.MobileValidator)
